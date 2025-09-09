@@ -1,0 +1,181 @@
+/* ========================================
+   Canine Corner - Responsive Enhancements
+   Combining Flexbox, CSS Grid, Media Queries & Viewport Units
+   ======================================== */
+
+/* ===== CSS GRID CONTAINER ===== */
+/* Using CSS Grid for the overall page layout */
+.page-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* header, main content, footer */
+    min-height: 100vh; /* Full viewport height */
+    gap: 0;
+}
+
+/* ===== VIEWPORT UNITS FOR TYPOGRAPHY ===== */
+/* Responsive typography that scales with screen size */
+.hero-title {
+    font-size: clamp(2rem, 5vw, 4rem); /* Scales between 2rem and 4rem */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Scales between 1rem and 1.5rem */
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* ===== FLEXBOX SERVICE CARDS ===== */
+/* Main container using flexbox for flexible layout */
+.services-container {
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 2rem; /* Space between cards */
+    padding: 2rem 0;
+    max-width: 90vw; /* Responsive width using viewport units */
+    margin: 0 auto;
+}
+
+/* Individual service cards */
+.service-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 300px; /* Consistent card heights */
+}
+
+/* Hover effects for better interactivity */
+.service-card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Card content using flexbox for internal layout */
+.service-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push button to bottom */
+    flex-grow: 1; /* Fill available space */
+    padding: 1.5rem;
+}
+
+/* ===== RESPONSIVE IMAGES ===== */
+/* base style that applies to all screen sizes than fine tune for each screen size */
+.service-card img {
+    width: 100%;
+    height: 250px; /* Taller height for mobile to show more of the image */
+    object-fit: cover; /* Maintain aspect ratio while filling space */
+    object-position: center center; /* Center the crop to show both people and dog */
+}
+
+/* Adjust image height for different screen sizes */
+@media (min-width: 768px) {
+    .service-card img {
+        height: 200px; /* Slightly shorter on tablets */
+    }
+}
+
+/* desktop instructions. I couldn't quite get this picture to show perfectly in the view */
+@media (min-width: 992px) {
+    .service-card img {
+        height: 180px; /* Shorter on desktop since we have more horizontal space */
+    }
+}
+
+/* ===== MEDIA QUERIES FOR RESPONSIVE BREAKPOINTS ===== */
+
+/* Mobile First Approach - Base styles above are for mobile */
+
+/* Small tablets and up (768px+) */
+@media (min-width: 768px) {
+    .services-container {
+        flex-direction: row; /* Switch to horizontal layout */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+    }
+    
+    .service-card {
+     /* flexbox calculations are always relative to the parent container , not the viewport or any other element */  
+        flex: 1 1 calc(50% - 1rem); /* Two cards per row 1 1 means the card will grow and shrink to fill the available space */
+        max-width: calc(50% - 1rem);
+    }
+    
+    /* Adjust container width for tablets */
+    .services-container {
+        max-width: 80vw;
+    }
+}
+
+/* Desktop and up (992px+) */
+@media (min-width: 992px) {
+    .services-container {
+        flex-direction: row;
+        flex-wrap: nowrap; /* Force all cards on one row */
+        justify-content: space-between; /* Distribute evenly across available space */
+    }
+    
+    .service-card {
+        flex: 0 0 calc(33.333% - 1rem); /* Fixed width, no grow/shrink, this fixed the issue of the third card wrapping to the next row in ddesktop view */
+        max-width: calc(33.333% - 1rem);
+    }
+    
+    /* Adjust container width for desktop */
+    .services-container {
+        max-width: 70vw;
+        gap: 1.5rem;
+    }
+}
+
+/* Large desktop (1200px+) */
+@media (min-width: 1200px) {
+    .services-container {
+        max-width: 60vw;
+        gap: 3rem;
+    }
+    
+    .service-card {
+        min-height: 350px; /* Slightly taller cards on large screens */
+    }
+}
+
+/* ===== ENHANCED HERO SECTION ===== */
+.hero-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4vh 5vw; /* Viewport-based padding */
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center {
+    text-align: center;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+/* ===== PRINT STYLES (Bonus from your media query lesson!) ===== */
+@media print {
+    .navbar, .footer {
+        display: none;
+    }
+    
+    .service-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section {
+        background: white;
+        color: black;
+    }
+}
