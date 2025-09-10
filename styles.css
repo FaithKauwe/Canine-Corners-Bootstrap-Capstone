@@ -57,6 +57,9 @@
 }
 
 /* Card content using flexbox for internal layout */
+/* Using aspect-ratio instead of fixed heights - 
+images are different layouts: wide, square and landscape.
+images will scale proportionally */
 .service-card .card-body {
     display: flex;
     flex-direction: column;
@@ -67,26 +70,15 @@
 
 /* ===== RESPONSIVE IMAGES ===== */
 /* base style that applies to all screen sizes than fine tune for each screen size */
-.service-card img {
-    width: 100%;
-    height: 250px; /* Taller height for mobile to show more of the image */
-    object-fit: cover; /* Maintain aspect ratio while filling space */
-    object-position: center center; /* Center the crop to show both people and dog */
+.service-card img,
+.service-card .card-img-top {
+    width: 100% !important;
+    aspect-ratio: 4/3 !important; /* Maintain consistent aspect ratio for all images, instead of using a uniform height- previously was 250px set */
+    object-fit: cover !important; /* crops the image proportionally */
+    object-position: center center !important; /* Center the crop to show both people and dog */
 }
 
-/* Adjust image height for different screen sizes */
-@media (min-width: 768px) {
-    .service-card img {
-        height: 200px; /* Slightly shorter on tablets */
-    }
-}
-
-/* desktop instructions. I couldn't quite get this picture to show perfectly in the view */
-@media (min-width: 992px) {
-    .service-card img {
-        height: 180px; /* Shorter on desktop since we have more horizontal space */
-    }
-}
+/* Using aspect-ratio instead of fixed heights - images will scale proportionally */
 
 /* ===== MEDIA QUERIES FOR RESPONSIVE BREAKPOINTS ===== */
 
