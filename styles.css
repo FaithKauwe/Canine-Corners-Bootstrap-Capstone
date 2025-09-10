@@ -50,7 +50,7 @@
     min-height: 300px; /* Consistent card heights */
 }
 
-/* Hover effects for better interactivity */
+/* Hover effects  */
 .service-card:hover {
     transform: translateY(-5px); /* Lift card on hover */
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
@@ -153,12 +153,14 @@ images will scale proportionally */
     margin-bottom: 2rem;
 }
 
-/* ===== PRINT STYLES (Bonus from your media query lesson!) ===== */
+/* ===== PRINT STYLES  ===== */
+/* hide navbar and footer on print view */
 @media print {
     .navbar, .footer {
         display: none;
     }
     
+/* prevent page breaks in the middle of a card , remove shadow effects, add border */
     .service-card {
         break-inside: avoid;
         box-shadow: none;
@@ -166,6 +168,7 @@ images will scale proportionally */
         margin-bottom: 1rem;
     }
     
+/* black and white for printing */
     .hero-section {
         background: white;
         color: black;
@@ -178,4 +181,102 @@ images will scale proportionally */
     height: 300px !important;
     object-fit: cover !important;
     object-position: center center !important;
+}
+
+/* ===== REQUEST FORM CSS GRID LAYOUT ===== */
+/* set up phase: define all containers and the default behaviors */
+/* Center the page header, its in its own div */
+.container h1,
+.container p {
+    text-align: center;
+}
+
+/* CSS Grid parentcontainer for form and desktop images, had to split out mobile pics into separate 
+container to have precise control- hide mobile pics on desktop and hide desktop pics in mobile view*/
+.form-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 2rem; /* Space between columns. rem == "root em", based on the root element's font size */
+    margin-top: 2rem; /* fonts and spacing aren't absolute, maintain ratios to the root em as screen size changes*/
+}
+
+/* Form section styling */
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* parent container for desktop images */
+.desktop-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Mobile images container - hidden on desktop view */
+.mobile-images-container {
+    display: none;
+}
+
+/* child elements of desktop-images parent - visible on desktop */
+.desktop-image {
+    display: block;
+}
+
+/* child elements of mobile-images-container parent */
+.mobile-image {
+    display: none;
+}
+
+/* Form images styling */
+.form-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.form-image:hover {
+    transform: scale(1.02);
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES FOR FORM ===== */
+/* override phase: use media queries to change behavior at specific sizing breakpoints */
+/* Mobile and tablet - images  below form */
+@media (max-width: 768px) {
+    .form-grid-container {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1.5rem;
+    }
+    
+    /* Hide desktop images on mobile */
+    .desktop-images {
+        display: none;
+    }
+    
+    /* and show mobile images container */
+    .mobile-images-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    
+    .mobile-image {
+        display: block;
+    }
+}
+
+/*  adjustments for small mobile screens */
+@media (max-width: 480px) {
+    .form-grid-container {
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .form-image {
+        border-radius: 4px;
+    }
 }
