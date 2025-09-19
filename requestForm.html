@@ -13,6 +13,8 @@
 </head>
 <body>
   
+  <!-- Skip Link for Accessibility, allows screen readers to skip -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -40,7 +42,8 @@
   </nav>
 
   <!-- mt-5 is the bootsrap container that holds the form, all images and h1 and p -->
-  <div class="container mt-5">
+  <main id="main-content">
+    <div class="container mt-5">
     <h1>Request a trainer</h1>
     <p>Please provide as much info as possible and we will reach out to you!</p>
 
@@ -93,7 +96,8 @@
       <img src="images/goodboisit.png" class="form-image mobile-image mobile-image-top" alt="Dog training session">
       <img src="images/collie.jpg" class="form-image mobile-image mobile-image-bottom" alt="Happy collie dog">
     </div>
-</div>
+    </div>
+  </main>
 
 <script>
     // JavaScript to handle form submission and display feedback
